@@ -1,3 +1,4 @@
+````markdown
 <h1 align="center">Hi 👋, I'm Dzaky</h1>
 <h3 align="center">A passionate Data Analyst Enthusiast from Indonesia 🇮🇩</h3>
 
@@ -86,18 +87,21 @@ files.upload()
 # Download dataset
 kaggle_dataset_slug = 'tfisthis/global-air-quality-and-respiratory-health-outcomes'
 !kaggle datasets download {kaggle_dataset_slug}
-2. Data Cleaning & Pre-processing
+````
+
+#### 2\. Data Cleaning & Pre-processing
+
 After the dataset is extracted, the next step is to ensure the data is ready for analysis. This includes:
 
-Loading Data: Loading the CSV file into a Pandas DataFrame.
-Data Type Conversion: Converting the 'date' column to datetime type and setting it as the index.
-Filter Tanggal: Filtering data only for the years 2020 to 2025 to focus on recent trends.
-Missing Values Handling: Filling missing values (NaN) with the median for numerical columns and the mode for categorical columns.
-Duplicate Handling: Dropping duplicate rows to ensure data integrity.
+  * **Loading Data:** Loading the CSV file into a Pandas DataFrame.
+  * **Data Type Conversion:** Converting the 'date' column to datetime type and setting it as the index.
+  * **Filter Tanggal:** Filtering data only for the years 2020 to 2025 to focus on recent trends.
+  * **Missing Values Handling:** Filling missing values (NaN) with the median for numerical columns and the mode for categorical columns.
+  * **Duplicate Handling:** Dropping duplicate rows to ensure data integrity.
+
 <!-- end list -->
 
-Python
-
+```python
 # Example data cleaning code
 df['date'] = pd.to_datetime(df['date'])
 df.set_index('date', inplace=True)
@@ -116,12 +120,15 @@ for col in df_filtered.columns:
 # Penanganan Duplikat
 if df_filtered.duplicated().sum() > 0:
     df_filtered.drop_duplicates(inplace=True)
-3. Exploratory Data Analysis (EDA)
-Distribution of Key Variables
+```
+
+#### 3\. Exploratory Data Analysis (EDA)
+
+##### Distribution of Key Variables
+
 Understanding the distribution of key variables like PM2.5, NO2, PM10, and Hospital Admissions is the first step. This helps us see patterns and the spread of the data.
 
-Python
-
+```python
 # Code for distribution plots
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -155,11 +162,13 @@ plt.ylabel('Frekuensi')
 
 plt.tight_layout()
 plt.show()
-Correlation Heatmap
+```
+
+##### Correlation Heatmap
+
 A correlation heatmap helps us identify relationships between numerical variables. Is there a strong correlation between air pollutants and hospital admissions?
 
-Python
-
+```python
 # Code for correlation heatmap
 print("\nHeatmap Korelasi Antar Variabel Numerik:")
 correlation_matrix = df_filtered.corr(numeric_only=True)
@@ -167,11 +176,13 @@ plt.figure(figsize=(14, 10))
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
 plt.title('Heatmap Korelasi Antar Variabel')
 plt.show()
-Bivariate Relationships
+```
+
+##### Bivariate Relationships
+
 Scatter plots directly show the relationship between PM2.5 and Hospital Admissions. Box plots illustrate the variation in Hospital Admissions across different cities.
 
-Python
-
+```python
 # Code for scatter plot and box plot
 print("\nVisualisasi Hubungan Bivariat Kunci:")
 plt.figure(figsize=(10, 7))
@@ -191,11 +202,13 @@ plt.xticks(rotation=45, ha='right')
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.tight_layout()
 plt.show()
-4. Monthly Trend Analysis
+```
+
+#### 4\. Monthly Trend Analysis
+
 To understand temporal dynamics, data is aggregated on a monthly basis. This allows us to observe trends in air quality and their impact on respiratory health over time.
 
-Python
-
+```python
 # Resampling data to monthly
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -226,14 +239,16 @@ plt.title('Tren Rata-rata PM2.5 dan Hospital Admissions Bulanan (2020-2025)')
 plt.xlim(pd.Timestamp('2020-01-01'), pd.Timestamp('2025-12-31'))
 fig_global_trend.tight_layout()
 plt.show()
-Monthly Average Trends for PM2.5 and Hospital Admissions (2020-2025)
-(You can embed an image of the plot here if GitHub allows, or provide a link to the image)
+```
 
-5. Interactive Visualization per City (Plotly)
-This is the most exciting part! I created an interactive visualization using Plotly that allows you to select a city and view the monthly trends for PM2.5 and Hospital Admissions specifically for that city. This provides flexibility for in-depth and personalized data exploration.
+**Monthly Average Trends for PM2.5 and Hospital Admissions (2020-2025)**
+*(You can embed an image of the plot here if GitHub allows, or provide a link to the image)*
 
-Python
+#### 5\. Interactive Visualization per City (Plotly)
 
+This is the most exciting part\! I created an interactive visualization using Plotly that allows you to select a city and view the monthly trends for PM2.5 and Hospital Admissions specifically for that city. This provides flexibility for in-depth and personalized data exploration.
+
+```python
 # Code for Plotly interactive visualization
 import plotly.graph_objects as go
 import plotly.express as px
@@ -334,18 +349,32 @@ fig_interactive.update_layout(
 )
 
 fig_interactive.show()
-Click the Buttons Below to See Trends per City:
-(Embed the interactive Plotly plot here if GitHub supports Plotly rendering. Otherwise, you can include a GIF or screenshot and direct users to run the notebook in their Colab for the full interactive experience.)
+```
 
-🚀 Conclusion and Next Steps
+**Click the Buttons Below to See Trends per City:**
+*(Embed the interactive Plotly plot here if GitHub supports Plotly rendering. Otherwise, you can include a GIF or screenshot and direct users to run the notebook in their Colab for the full interactive experience.)*
+
+-----
+
+### 🚀 Conclusion and Next Steps
+
 From this analysis, we can observe patterns and correlations between air quality and respiratory health. Interactive visualizations enable further exploration to uncover city-specific insights.
 
-Possible Next Steps:
+**Possible Next Steps:**
 
-Seasonal Analysis: Studying how seasons influence air quality and health cases.
-Predictive Modeling: Building models to forecast pollutant levels or hospital admissions.
-Analyzing Other Factors: Incorporating factors like environmental policies, population density, and industry.
-🤝 Contributions
-Suggestions and contributions are highly welcome! If you have ideas to improve this analysis or find any bugs, feel free to open an issue or pull request.
+  * **Seasonal Analysis:** Studying how seasons influence air quality and health cases.
+  * **Predictive Modeling:** Building models to forecast pollutant levels or hospital admissions.
+  * **Analyzing Other Factors:** Incorporating factors like environmental policies, population density, and industry.
 
-Thank you for exploring my project! Feel free to reach out if you have any questions or would like to collaborate.
+-----
+
+### 🤝 Contributions
+
+Suggestions and contributions are highly welcome\! If you have ideas to improve this analysis or find any bugs, feel free to open an `issue` or `pull request`.
+
+-----
+
+Thank you for exploring my project\! Feel free to reach out if you have any questions or would like to collaborate.
+
+```
+```
